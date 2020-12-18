@@ -39,7 +39,7 @@ function run() {
             for (var _i = 0, err_list_1 = err_list; _i < err_list_1.length; _i++) {
                 var line_matcher = err_list_1[_i];
                 if (line_matcher.test(line)) {
-                    proc.kill();
+                    proc.kill('SIGINT');
                 }
             }
         });
@@ -51,7 +51,7 @@ function run() {
             for (var _i = 0, err_list_2 = err_list; _i < err_list_2.length; _i++) {
                 var line_matcher = err_list_2[_i];
                 if (line_matcher.test(line)) {
-                    proc.kill();
+                    proc.kill('SIGINT');
                 }
             }
         });
