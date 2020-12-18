@@ -11,7 +11,7 @@ var fs = __importStar(require("fs"));
 var ini = __importStar(require("ini"));
 var child_process = __importStar(require("child_process"));
 var readline = __importStar(require("readline"));
-var CONF_PATH = './conf.ini';
+var CONF_PATH = 'conf.ini';
 var err_list = [
     /The connection server failed and will be reconnected in five seconds, error Validation key/i.compile()
 ];
