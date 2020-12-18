@@ -13,7 +13,7 @@ var child_process = __importStar(require("child_process"));
 var readline = __importStar(require("readline"));
 var CONF_PATH = 'conf.ini';
 var err_list = [
-    /The connection server failed and will be reconnected in five seconds, error Validation key/i.compile()
+    /The connection server failed and will be reconnected in five seconds, error Validation key/i
 ];
 var npc_path = 'npc';
 var npc_log_path = '/root/npc.log';
@@ -37,22 +37,26 @@ function run() {
         var stdout = readline.createInterface(proc.stdout);
         stdout.on('line', function (line) {
             logger.log(line);
-            /* for (const line_matcher of err_list) {
+            for (var _i = 0, err_list_1 = err_list; _i < err_list_1.length; _i++) {
+                var line_matcher = err_list_1[_i];
                 if (line_matcher.test(line)) {
-                    proc.kill('SIGINT')
+                    logger.log('found err !, require exit !');
+                    proc.kill('SIGINT');
                 }
-            } */
+            }
         });
     }
     if (proc.stderr) {
         var stderr = readline.createInterface(proc.stderr);
         stderr.on('line', function (line) {
             logger.log(line);
-            /* for (const line_matcher of err_list) {
+            for (var _i = 0, err_list_2 = err_list; _i < err_list_2.length; _i++) {
+                var line_matcher = err_list_2[_i];
                 if (line_matcher.test(line)) {
-                    proc.kill('SIGINT')
+                    logger.log('found err !, require exit !');
+                    proc.kill('SIGINT');
                 }
-            } */
+            }
         });
     }
     proc.on('error', function (err) {
@@ -62,9 +66,9 @@ function run() {
     });
     proc.on('exit', function (code, signal) {
         logger.log("npc exited, code: " + code + ", signal: " + signal + ", restart it after 5 sec delay !");
-        /* setTimeout(() => {
-            run() // restart
-        }, 5000) */
+        setTimeout(function () {
+            run(); // restart
+        }, 5000);
     });
 }
 // launch

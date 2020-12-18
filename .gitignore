@@ -4,3 +4,4 @@ src
 *.code-workspace
 ts*.json
 *.js.map
+test
