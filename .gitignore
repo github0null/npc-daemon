@@ -1,5 +1,6 @@
 node_modules
 src
+.vscode
 *.code-workspace
-*.json
+ts*.json
 *.js.map
