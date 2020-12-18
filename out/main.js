@@ -31,6 +31,7 @@ if (ini_dom.log_path) {
 var out_stream = fs.createWriteStream(npc_log_path, { flags: 'a' });
 var logger = new console.Console(out_stream);
 function run() {
+    logger.log("==================== launch ====================");
     var proc = child_process.execFile(npc_path, ["-config=" + npc_conf_path]);
     if (proc.stdout) {
         var stdout = readline.createInterface(proc.stdout);
@@ -56,11 +57,16 @@ function run() {
             }
         });
     }
+    proc.on('error', function (err) {
+        if (err) {
+            logger.log(err);
+        }
+    });
     proc.on('exit', function () {
         logger.log('npc exit, restart it after 5 sec delay !');
-        setTimeout(function () {
-            run(); // restart
-        }, 5000);
+        /* setTimeout(() => {
+            run() // restart
+        }, 5000) */
     });
 }
 // launch
