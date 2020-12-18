@@ -37,24 +37,22 @@ function run() {
         var stdout = readline.createInterface(proc.stdout);
         stdout.on('line', function (line) {
             logger.log(line);
-            for (var _i = 0, err_list_1 = err_list; _i < err_list_1.length; _i++) {
-                var line_matcher = err_list_1[_i];
+            /* for (const line_matcher of err_list) {
                 if (line_matcher.test(line)) {
-                    proc.kill('SIGINT');
+                    proc.kill('SIGINT')
                 }
-            }
+            } */
         });
     }
     if (proc.stderr) {
         var stderr = readline.createInterface(proc.stderr);
         stderr.on('line', function (line) {
             logger.log(line);
-            for (var _i = 0, err_list_2 = err_list; _i < err_list_2.length; _i++) {
-                var line_matcher = err_list_2[_i];
+            /* for (const line_matcher of err_list) {
                 if (line_matcher.test(line)) {
-                    proc.kill('SIGINT');
+                    proc.kill('SIGINT')
                 }
-            }
+            } */
         });
     }
     proc.on('error', function (err) {
@@ -62,8 +60,8 @@ function run() {
             logger.log(err);
         }
     });
-    proc.on('exit', function () {
-        logger.log('npc exit, restart it after 5 sec delay !');
+    proc.on('exit', function (code, signal) {
+        logger.log("npc exited, code: " + code + ", signal: " + signal + ", restart it after 5 sec delay !");
         /* setTimeout(() => {
             run() // restart
         }, 5000) */
